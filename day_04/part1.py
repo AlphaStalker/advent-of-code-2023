@@ -11,11 +11,7 @@ def count_winning_numbers_we_have(
     return len(our_winning_numbers)
 
 
-def calculate_value(winning_numbers_count: int) -> int:
-    return int(2 ** (winning_numbers_count - 1))
-
-
-def get_card_value(line: str) -> int:
+def get_our_winning_numbers_count(line: str) -> int:
     numbers = line.split(': ')[1]
 
     winning_numbers_str, our_numbers_str = numbers.split(' | ')
@@ -23,8 +19,15 @@ def get_card_value(line: str) -> int:
     winning_numbers = get_numbers_out_of_numbers_str(winning_numbers_str)
     our_numbers = get_numbers_out_of_numbers_str(our_numbers_str)
 
-    our_winning_numbers_count = \
-        count_winning_numbers_we_have(winning_numbers, our_numbers)
+    return count_winning_numbers_we_have(winning_numbers, our_numbers)
+
+
+def calculate_value(winning_numbers_count: int) -> int:
+    return int(2 ** (winning_numbers_count - 1))
+
+
+def get_card_value(line: str) -> int:
+    our_winning_numbers_count = get_our_winning_numbers_count(line)
 
     return calculate_value(our_winning_numbers_count)
 
